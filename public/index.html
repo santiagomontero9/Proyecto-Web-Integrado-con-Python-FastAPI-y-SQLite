@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#182b32">
+  <meta name="description" content="Registro de jugadores y estadísticas de Fortnite.">
+  <title>Fortnite Tracker | Jugadores y estadísticas</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <div class="container brand">
+      <a class="brand-home" href="#inicio" aria-label="Fortnite Tracker, ir al inicio">
+        <span class="mark" aria-hidden="true">F<span>/</span></span>
+        <span class="brand-name"><strong>FORTNITE</strong><small>TRACKER</small></span>
+      </a>
+      <nav aria-label="Menú principal">
+        <a href="#jugadores">Jugadores</a>
+        <a href="#temporadas">Temporadas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" id="inicio">
+    <section class="intro" aria-labelledby="intro-titulo">
+      <div class="intro-copy">
+        <span class="eyebrow"><span class="eyebrow-line"></span> REGISTRO DE PARTIDAS / FORTNITE</span>
+        <h1 id="intro-titulo">TU REGISTRO<br><span>DE JUEGO.</span></h1>
+        <p>Guardá las partidas, victorias y eliminaciones de cada jugador. Las estadísticas se anotan manualmente.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true"><span>FN</span><i></i></div>
+    </section>
+
+    <section class="stats" aria-label="Totales del registro">
+      <div class="metric"><small>01 <span>Jugadores</span></small><strong id="total-jugadores">—</strong></div>
+      <div class="metric"><small>02 <span>Partidas</span></small><strong id="total-partidas">—</strong></div>
+      <div class="metric"><small>03 <span>Victorias</span></small><strong id="total-victorias">—</strong></div>
+      <div class="metric"><small>04 <span>Eliminaciones</span></small><strong id="total-eliminaciones">—</strong></div>
+    </section>
+
+    <section class="panel" id="jugadores" aria-labelledby="jugadores-titulo">
+      <div class="panel-header">
+        <div>
+          <span class="section-index">01 / JUGADORES</span>
+          <h2 id="jugadores-titulo">Jugadores registrados</h2>
+          <p>Consultá o cambiá las estadísticas de cada jugador.</p>
+        </div>
+        <button class="primary" id="nuevo" type="button"><span aria-hidden="true">+</span> Nuevo jugador</button>
+      </div>
+      <div class="toolbar">
+        <label for="buscar">Buscar por nombre</label>
+        <input id="buscar" placeholder="Nombre del jugador" type="search" autocomplete="off">
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Jugador</th><th>Plataforma</th><th>Temporada</th><th>Partidas</th><th>Victorias</th><th>Eliminaciones</th><th>Acciones</th></tr></thead>
+          <tbody id="lista"><tr><td colspan="7">Cargando jugadores...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" id="temporadas" aria-labelledby="temporadas-titulo">
+      <div class="panel-header">
+        <div>
+          <span class="section-index">02 / TEMPORADAS</span>
+          <h2 id="temporadas-titulo">Temporadas</h2>
+          <p>Creá una temporada para organizar los jugadores.</p>
+        </div>
+      </div>
+      <form id="form-temporada" class="inline-form">
+        <label>Nombre<input name="nombre" required minlength="2" maxlength="60" placeholder="Ej: Temporada 4"></label>
+        <label>Capítulo<input name="capitulo" required minlength="2" maxlength="60" placeholder="Ej: Capítulo 5"></label>
+        <button class="primary" type="submit">Agregar temporada</button>
+      </form>
+      <ul id="lista-temporadas" class="seasons"></ul>
+      <p class="hint">Para borrar una temporada, primero eliminá los jugadores que tenga asignados.</p>
+    </section>
+
+    <footer class="footer"><span>FORTNITE TRACKER</span><span>Proyecto escolar no oficial. Sin relación con Epic Games.</span></footer>
+  </main>
+
+  <dialog id="modal" aria-labelledby="modal-titulo">
+    <form id="form-jugador">
+      <div class="dialog-head">
+        <div><span class="section-index">FICHA DE JUGADOR</span><h2 id="modal-titulo">Nuevo jugador</h2></div>
+        <button type="button" class="close" id="cerrar" aria-label="Cerrar">×</button>
+      </div>
+      <input type="hidden" name="id">
+      <label>Nombre del jugador<input name="nombre" required minlength="2" maxlength="30" placeholder="Ej: Player123"></label>
+      <label>Plataforma
+        <select name="plataforma" required>
+          <option>PC</option><option>PlayStation</option><option>Xbox</option><option>Nintendo Switch</option><option>Móvil</option>
+        </select>
+      </label>
+      <label>Temporada<select name="temporada_id" required></select></label>
+      <div class="form-grid">
+        <label>Partidas<input name="partidas" type="number" required min="0" max="1000000" value="0"></label>
+        <label>Victorias<input name="victorias" type="number" required min="0" max="1000000" value="0"></label>
+        <label>Eliminaciones<input name="eliminaciones" type="number" required min="0" max="10000000" value="0"></label>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" id="cancelar">Cancelar</button>
+        <button class="primary" type="submit">Guardar jugador</button>
+      </div>
+    </form>
+  </dialog>
+  <div role="status" id="mensaje" aria-live="polite"></div>
+</body>
+</html>
